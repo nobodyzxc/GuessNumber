@@ -1,6 +1,6 @@
 # GUESS NUMBER GAME
 
-To teach beginner python,
+To teach my friend python,
 
 I try to make a simple game.
 
