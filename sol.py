@@ -18,7 +18,6 @@ def genAns(idx):
 intList = lambda l:list(map(int , list(l)))
 lfilter = lambda f , l:list(filter(f , l))
 nans = lambda l , a , b: lfilter(lambda p:judge(intList(l) , p) == (a , b) , ans)
-
 def redAns(line , a , b): global ans; ans = nans(line , a , b)
 
 def tryAns(line):
