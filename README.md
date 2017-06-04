@@ -33,3 +33,22 @@ $ python -i sol.py           │$ python guess.py
 '7493'                       │
 >>>                          │
 ```
+
+test.py:
+```
+5283 5293 8204 8214 8241
+8431 9204 9214 9241 9431
+
+^ probs that need guess 8 times
+
+(1, 1)
+(2, 15)
+(3, 211)
+(4, 1240)
+(5, 2108)
+(6, 1203)
+(7, 252)
+(8, 10)   < at least guess 8 times by using sol.py
+(9, 0)
+(10, 0)
+```
