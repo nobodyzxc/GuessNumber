@@ -1,4 +1,4 @@
-#lang racket/base
+;#lang racket/base
 (#%require racket/vector) ; vector
 (#%require racket/list) ; remove-duplicates
 
@@ -9,7 +9,7 @@
 
 (define (number->list n)
   (define (char->digit ch)
-    (- (char->integer ch) (char->integer #\0)))
+    (apply - (map char->integer (list ch #\0))))
   (map char->digit (string->list (number->string n))))
 
 (define (make-cmpv init-seq)
@@ -28,19 +28,18 @@
 (define (number->cmpv number)
   (make-cmpv (number->list number)))
 
-(define (vector-zip . args) (apply vector-map (cons list args)))
+(define (vector-zip . args)
+  (apply vector-map (cons list args)))
 
 (define (make-prob)
-  (let loop ((answer '())
+  (let loop ((prob '())
              (cand #(0 1 2 3 4 5 6 7 8 9)))
     (define pos (random 0 (vector-length cand)))
-    (if (< (length answer) 4)
+    (if (< (length prob) 4)
       (loop
-        (cons (vector-ref cand pos) answer)
+        (cons (vector-ref cand pos) prob)
         (vector-del cand pos))
-      answer
-      )
-    ))
+      prob)))
 
 (define (count-ab va vb)
   (let ((a 0) (b 0))
@@ -60,7 +59,9 @@
          (newline) (flush-output)))
 
 (define (illegal-guess guess)
-  (not (= (length (remove-duplicates guess)) 4)))
+  (not (and
+         (= (length (remove-duplicates guess)) 4)
+         (= (length guess) 4))))
 
 (define (game-loop)
   (begin
@@ -86,7 +87,7 @@
       (else (show-msg "illegal guess") (game-loop)))
     ))
 
-(define ca (make-prob))
-(show-msg ca)
-(define answer (make-cmpv ca))
+(define prob (make-prob))
+(show-msg prob)
+(define answer (make-cmpv prob))
 (game-loop)
